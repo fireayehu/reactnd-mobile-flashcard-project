@@ -27,8 +27,11 @@ class DeckDetails extends Component {
     if (cards.length === 0) {
       alert("This Deck has no cards, Add a card.");
     } else if (cards.length > 0) {
-      clearLocalNotification().then(setLocalNotification);
-      this.props.navigation.navigate("Quiz", cards);
+      // clearLocalNotification().then(setLocalNotification);
+      this.props.navigation.navigate("Quiz", {
+        title: this.props.singleDeck.deckTitle,
+        cards,
+      });
     }
   };
 
