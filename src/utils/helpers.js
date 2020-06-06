@@ -1,5 +1,6 @@
-import { Notifications, Permissions } from "expo";
+import { Notifications } from "expo";
 import AsyncStorage from "@react-native-community/async-storage";
+import * as Permissions from "expo-permissions";
 
 export const NOTIFICATION_KEY = "MobileFlashCards:notifications";
 export const FLASHCARD_DB_KEY = "MobileFlashCards:cards";
@@ -10,7 +11,7 @@ export function getUniqueId() {
 
 export function clearLocalNotification() {
   return AsyncStorage.removeItem(NOTIFICATION_KEY).then(
-    Notifications.cancelAllScheduledNotificationsAsync
+    () => Notifications.cancelAllScheduledNotificationsAsync
   );
 }
 
@@ -36,25 +37,27 @@ export function setLocalNotification() {
     .then((data) => {
       if (data === null) {
         if (!data) {
-          Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
-            if (status === "granted") {
-              Notifications.cancelAllScheduledNotificationsAsync();
-              let tomorrow = new Date();
-              tomorrow.setDate(tomorrow.getDate() + 1);
-              tomorrow.setHours(20);
-              tomorrow.setMinutes(0);
+          Permissions.askAsync(Permissions.NOTIFICATIONS)
+            .then(({ status }) => {
+              if (status === "granted") {
+                Notifications.cancelAllScheduledNotificationsAsync();
+                let tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setHours(20);
+                tomorrow.setMinutes(0);
 
-              Notifications.scheduleLocalNotificationAsync(
-                createNotification(),
-                {
-                  time: tomorrow,
-                  repeat: "day",
-                }
-              );
+                Notifications.scheduleLocalNotificationAsync(
+                  createNotification(),
+                  {
+                    time: tomorrow,
+                    repeat: "day",
+                  }
+                );
 
-              AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
-            }
-          });
+                AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
+              }
+            })
+            .catch(console.log);
         }
       }
       console.log("Notification Reset for tomorrow");

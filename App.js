@@ -1,7 +1,13 @@
-import * as React from "react";
+import React, { Component } from "react";
 
 import MainStack from "./src/navigation/MainStackNavigation";
+import { setLocalNotification } from "./src/utils/helpers";
 
-export default function App() {
-  return <MainStack />;
+export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+  render() {
+    return <MainStack />;
+  }
 }
