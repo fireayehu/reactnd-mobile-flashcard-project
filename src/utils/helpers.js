@@ -1,5 +1,5 @@
 import * as api from "./api";
-import { Notification, Permissions } from "expo";
+import { Notifications, Permissions } from "expo";
 import AsyncStorage from "@react-native-community/async-storage";
 
 export const NOTIFICATION_KEY = "MobileFlashCards:notifications";
