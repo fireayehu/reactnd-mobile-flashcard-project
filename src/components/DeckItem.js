@@ -5,28 +5,57 @@ import {
   Text,
   StyleSheet,
   Platform,
+  Animated,
+  Dimensions,
 } from "react-native";
 
-const DeckItem = ({ deck, navigation }) => (
-  <TouchableOpacity
-    style={styles.deck}
-    onPress={() =>
+const DeckItem = ({ deck, navigation }) => {
+  const margin = new Animated.Value(0);
+
+  const onDeckClick = () => {
+    Animated.timing(margin, {
+      toValue: Dimensions.get("window").width,
+      duration: 500,
+      useNativeDriver: true,
+    }).start(() => {
       navigation.navigate("DeckDetails", {
         deck: deck,
-      })
-    }
-  >
-    <View style={Platform.OS === "ios" ? styles.iosRow : styles.androidRow}>
-      <Text style={{ fontSize: 22, fontWeight: "bold" }}>
-        {" "}
-        {deck.deckTitle}{" "}
-      </Text>
-      <Text style={{ paddingBottom: 10 }}>
-        {deck.cards.length === 0 ? " No cards" : deck.cards.length + " Cards"}
-      </Text>
-    </View>
-  </TouchableOpacity>
-);
+      });
+
+      Animated.timing(margin, {
+        toValue: 1,
+        duration: 10,
+        useNativeDriver: true,
+      }).start();
+    });
+  };
+
+  return (
+    <TouchableOpacity
+      style={[
+        styles.deck,
+        {
+          transform: [
+            {
+              translateX: margin,
+            },
+          ],
+        },
+      ]}
+      onPress={onDeckClick}
+    >
+      <View style={Platform.OS === "ios" ? styles.iosRow : styles.androidRow}>
+        <Text style={{ fontSize: 22, fontWeight: "bold" }}>
+          {" "}
+          {deck.deckTitle}{" "}
+        </Text>
+        <Text style={{ paddingBottom: 10 }}>
+          {deck.cards.length === 0 ? " No cards" : deck.cards.length + " Cards"}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   iosRow: {
