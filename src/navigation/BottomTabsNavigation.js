@@ -3,7 +3,7 @@ import { Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome } from "@expo/vector-icons";
 import DecksScreen from "../screens/DecksScreeen";
-
+import AddDeckScreren from "../screens/AddDeckScreen";
 const Tab = createBottomTabNavigator();
 
 const BottomTabs = () => (
@@ -27,7 +27,7 @@ const BottomTabs = () => (
     />
     <Tab.Screen
       name="NewDeck"
-      component={DecksScreen}
+      component={AddDeckScreren}
       options={{
         tabBarLabel: "New Deck",
         tabBarIcon: ({ color, size }) => (

@@ -1,12 +1,11 @@
 import { Notifications, Permissions } from "expo";
 import AsyncStorage from "@react-native-community/async-storage";
-import { v4 as uuidv4 } from "uuid";
 
 export const NOTIFICATION_KEY = "MobileFlashCards:notifications";
 export const FLASHCARD_DB_KEY = "MobileFlashCards:cards";
 
 export function getUniqueId() {
-  return uuidv4();
+  return `MobileFlashCards-${new Date().toLocaleTimeString()}-${Date.now()}`;
 }
 
 export function clearLocalNotification() {

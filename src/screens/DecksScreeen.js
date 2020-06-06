@@ -20,7 +20,9 @@ class DecksScreen extends Component {
         <FlatList
           keyExtractor={(item) => item.deckId}
           data={decks}
-          renderItem={({ item }) => <DeckItem deck={item} />}
+          renderItem={({ item }) => (
+            <DeckItem deck={item} navigation={this.props.navigation} />
+          )}
         />
       </View>
     );
