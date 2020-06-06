@@ -2,8 +2,6 @@ import { combineReducers } from "redux";
 import { ADD_NEW_DECK, GET_ALL_DECKS, GET_SINGLE_DECK } from "../actions/deck";
 import { ADD_NEW_CARD } from "../actions/card";
 
-import { setStarterDecks, startingDeck } from "../../utils/helpers";
-
 export const INITAL_STATE = {
   decks: [],
   singleDeck: {},
@@ -26,15 +24,8 @@ const reducer = (state = INITAL_STATE, action) => {
         singleDeck: editedSingleDeck[0],
       };
     case GET_ALL_DECKS:
-      let decks = undefined;
-      if (action.decks === undefined) {
-        setStarterDecks(startingDeck);
-        decks = [startingDeck];
-      } else if (action.decks.length > 0) {
-        decks = action.decks;
-      }
       return {
-        decks: decks,
+        decks: action.decks ? action.decks : [],
         singleDeck: state.singleDeck,
       };
     case GET_SINGLE_DECK:

@@ -2,12 +2,13 @@ import React from "react";
 import { registerRootComponent } from "expo";
 import "react-native-gesture-handler";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import { NavigationContainer } from "@react-navigation/native";
 import reducer from "./src/redux/reducer";
 import App from "./App";
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunk));
 
 const Entry = () => (
   <NavigationContainer>

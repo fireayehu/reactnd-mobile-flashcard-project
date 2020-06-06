@@ -9,7 +9,7 @@ export const addNewDeck = (deck) => (dispatch) => {
     .addDeck(deck)
     .then((deckObject) => {
       dispatch({
-        type: "ADD_NEW_DECK",
+        type: ADD_NEW_DECK,
         deckObject,
       });
     })
@@ -17,12 +17,13 @@ export const addNewDeck = (deck) => (dispatch) => {
 };
 
 export const getAllDecks = () => (dispatch) => {
-  api.fetchAllDecks().then((decks) =>
+  api.fetchAllDecks().then((decks) => {
+    console.log(decks);
     dispatch({
       type: GET_ALL_DECKS,
       decks,
-    })
-  );
+    });
+  });
 };
 
 export const getOneDeck = (deckId) => (dispatch) => {

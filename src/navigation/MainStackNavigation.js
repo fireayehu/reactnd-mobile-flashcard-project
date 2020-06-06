@@ -6,7 +6,13 @@ const Stack = createStackNavigator();
 
 const MainStack = () => (
   <Stack.Navigator>
-    <Stack.Screen name="BottomTabs" component={BottomTabs} />
+    <Stack.Screen
+      name="BottomTabs"
+      component={BottomTabs}
+      options={{
+        headerShown: false,
+      }}
+    />
     <Stack.Screen name="NewDeck" component={DecksScreen} />
     <Stack.Screen name="DeckDetails" component={DecksScreen} />
     <Stack.Screen name="Quiz" component={DecksScreen} />

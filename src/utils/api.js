@@ -1,15 +1,6 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import { FLASHCARD_DB_KEY } from "./helpers.js";
 
-export function starterDecks(deck) {
-  return AsyncStorage.setItem(
-    FLASHCARD_DB_KEY,
-    JSON.stringify({
-      [deck.deckId]: deck,
-    })
-  ).catch((err) => console.log(err));
-}
-
 export function addDeck(deck) {
   const deckObject = deck;
   return AsyncStorage.mergeItem(

@@ -1,38 +1,12 @@
-import * as api from "./api";
 import { Notifications, Permissions } from "expo";
 import AsyncStorage from "@react-native-community/async-storage";
+import { v4 as uuidv4 } from "uuid";
 
 export const NOTIFICATION_KEY = "MobileFlashCards:notifications";
 export const FLASHCARD_DB_KEY = "MobileFlashCards:cards";
 
-export function getRandomNumber() {
-  return Math.floor(Math.random() * 100000) + 0;
-}
-
-export const startingDeck = {
-  deckId: "Deck32355",
-  deckTitle: "React Native",
-  cards: [
-    {
-      question: "Both ReactJS and React Native use the same react library?",
-      answer: true,
-    },
-    {
-      question: "React Native is not croos platform?",
-      answer: false,
-    },
-    {
-      question: "React Native has built in animation library?",
-      answer: true,
-    },
-  ],
-};
-
-export function setStarterDecks(starterDecks) {
-  api
-    .starterDecks(starterDecks)
-    .then(console.log("Starter Decks Set"))
-    .catch((err) => console.log(err));
+export function getUniqueId() {
+  return uuidv4();
 }
 
 export function clearLocalNotification() {
