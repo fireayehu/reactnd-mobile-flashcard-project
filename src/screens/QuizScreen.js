@@ -30,6 +30,9 @@ class QuizScreen extends Component {
   };
 
   pressedIncorrect = () => {
+    this.setState({
+      viewAnswer: false,
+    });
     let updatedCard = this.state.currentCard;
     let answeredCorrect = this.state.answeredCorrect;
     if (this.state.currentCard === this.state.cards.length - 1) {
@@ -50,6 +53,9 @@ class QuizScreen extends Component {
   };
 
   pressedCorrect = () => {
+    this.setState({
+      viewAnswer: false,
+    });
     let updatedCard = this.state.currentCard;
     let answeredCorrect = this.state.answeredCorrect;
     if (this.state.currentCard === this.state.cards.length - 1) {
@@ -101,15 +107,6 @@ class QuizScreen extends Component {
         >
           {!state.cardsLoaded ? null : (
             <View style={{ alignItems: "center" }}>
-              <Text style={{ fontSize: 22, marginBottom: 10 }}>
-                {state.cards[state.currentCard].question}
-              </Text>
-              <CustomButton
-                onPress={() => this.viewAnswer()}
-                text={state.viewAnswer ? "Question" : "Answer"}
-                color={red}
-                bg={white}
-              />
               {state.viewAnswer ? (
                 <View>
                   {state.cards[state.currentCard].answer ? (
@@ -118,7 +115,18 @@ class QuizScreen extends Component {
                     <Text style={{ color: red, fontSize: 23 }}>Incorrect</Text>
                   )}
                 </View>
-              ) : null}
+              ) : (
+                <Text style={{ fontSize: 22, marginBottom: 10 }}>
+                  {state.cards[state.currentCard].question}
+                </Text>
+              )}
+
+              <CustomButton
+                onPress={() => this.viewAnswer()}
+                text={state.viewAnswer ? "Question" : "Answer"}
+                color={red}
+                bg={white}
+              />
             </View>
           )}
 

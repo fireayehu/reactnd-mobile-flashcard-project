@@ -16,6 +16,18 @@ export const addNewDeck = (deck) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
+export const deleteDeck = (deckId) => (dispatch) => {
+  api
+    .deletDeck(deckId)
+    .then((deckObject) => {
+      dispatch({
+        type: GET_ALL_DECKS,
+        decks: deckObject,
+      });
+    })
+    .catch((err) => console.log(err));
+};
+
 export const getAllDecks = () => (dispatch) => {
   api.fetchAllDecks().then((decks) => {
     console.log(decks);

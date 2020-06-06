@@ -37,6 +37,21 @@ export function addCard(deckId, card) {
     .catch((err) => console.log(err));
 }
 
+export function deletDeck(deckId) {
+  return AsyncStorage.getItem(FLASHCARD_DB_KEY)
+    .then((stringifiedDecks) => {
+      let decks = JSON.parse(stringifiedDecks);
+      delete decks[deckId];
+      let stringifiedUpdatedDecks = JSON.stringify(decks);
+      AsyncStorage.setItem(
+        FLASHCARD_DB_KEY,
+        stringifiedUpdatedDecks
+      ).catch((err) => console.log(err));
+      return Object.values(decks);
+    })
+    .catch((err) => console.log(err));
+}
+
 export function deleteAllDecks() {
   return AsyncStorage.clear();
 }

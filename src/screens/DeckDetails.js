@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { white, red, gray } from "../utils/colors";
-import { getOneDeck } from "../redux/actions/deck";
+import { getOneDeck, deleteDeck } from "../redux/actions/deck";
 
 import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 import CustomButton from "../components/CustomButton";
@@ -33,6 +33,12 @@ class DeckDetails extends Component {
         cards,
       });
     }
+  };
+  deleteDeck = () => {
+    this.props.deleteDeck(this.props.route.params.deck.deckId);
+    this.props.navigation.navigate("BottomTabs", {
+      screen: "Decks",
+    });
   };
 
   render() {
@@ -76,7 +82,7 @@ class DeckDetails extends Component {
               />
               <CustomButton
                 text="Delete Deck"
-                onPress={this.startQuiz}
+                onPress={this.deleteDeck}
                 color={red}
                 bg={white}
               />
@@ -168,6 +174,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = (dispatch) => ({
   getOneDeck: (deckId) => dispatch(getOneDeck(deckId)),
+  deleteDeck: (deckId) => dispatch(deleteDeck(deckId)),
 });
 
 const mapStateToProps = (state) => ({
