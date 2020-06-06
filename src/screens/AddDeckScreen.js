@@ -30,18 +30,22 @@ class AddDeckScreen extends Component {
 
   handleSubmit = () => {
     const newDeck = { ...this.state.deck };
-    this.props.addNewDeck(newDeck);
-    let resetDeck = { ...this.state.deck };
-    this.setState({
-      deck: {
-        deckId: getUniqueId(),
-        deckTitle: "",
-        cards: [],
-      },
-    });
-    setTimeout(() => {
-      this.props.navigation.navigate("DeckDetails", { deck: resetDeck });
-    }, 300);
+    if (newDeck.deckTitle === "") {
+      alert("Please provide a deck title first.");
+    } else {
+      this.props.addNewDeck(newDeck);
+      let resetDeck = { ...this.state.deck };
+      this.setState({
+        deck: {
+          deckId: getUniqueId(),
+          deckTitle: "",
+          cards: [],
+        },
+      });
+      setTimeout(() => {
+        this.props.navigation.navigate("DeckDetails", { deck: resetDeck });
+      }, 300);
+    }
   };
 
   render() {
