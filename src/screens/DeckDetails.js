@@ -67,7 +67,7 @@ class DeckDetails extends Component {
                 bg={white}
                 color={gray}
                 border={{ width: 1, color: gray }}
-                onPress={() => this.props.navigation.navigate("NewCard", deck)}
+                onPress={() => this.props.navigation.navigate("Card", { deck })}
               />
               <CustomButton
                 text="Start Quize"

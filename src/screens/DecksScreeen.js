@@ -20,6 +20,7 @@ class DecksScreen extends Component {
         <FlatList
           keyExtractor={(item) => item.deckId}
           data={decks}
+          showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <DeckItem deck={item} navigation={this.props.navigation} />
           )}
